@@ -23,6 +23,11 @@ class KafkaDispatcher<T> implements Closeable {
         properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
         properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, GsonSerializer.class.getName());
+        //Configuração para saber se todas minhas replicas recebeu a mensagem
+        //Garantimos que se um dos meus topicos cair a mensagem vai ser processado por outro.
+        //Pode causar lentidão, porém devemos verificar se faz sentido essa configuração, e fazer testes para saber o daley,
+        //Caso não queira essa confirmação configurar o valor 0.
+        properties.setProperty(ProducerConfig.ACKS_CONFIG, "all");
         return properties;
     }
 
