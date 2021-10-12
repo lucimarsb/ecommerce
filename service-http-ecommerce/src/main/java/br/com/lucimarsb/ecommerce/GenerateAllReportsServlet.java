@@ -26,8 +26,6 @@ public class GenerateAllReportsServlet extends HttpServlet {
 
             bacthDispatcher.send("SEND_MESSAGE_TO_ALL_USERS", "USER_GENERATE_READING_REPORT", "USER_GENERATE_READING_REPORT");
 
-
-
             System.out.println("Enviado geração de relatório para todos os usuários.");
             resp.setStatus(HttpServletResponse.SC_OK);
             resp.getWriter().println("Pedido de relatórios gerados");
