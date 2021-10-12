@@ -1,13 +1,10 @@
 package br.com.lucimarsb.ecommerce;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 public class ReadinReportService {
 
@@ -18,7 +15,6 @@ public class ReadinReportService {
         try (var service = new KafkaService<>(ReadinReportService.class.getSimpleName(),
                 "ECOMMERCE_USER_GENERATE_READING_REPORT",
                 reportService::parse,
-                User.class,
                 Map.of())) {
             service.run();
         }
