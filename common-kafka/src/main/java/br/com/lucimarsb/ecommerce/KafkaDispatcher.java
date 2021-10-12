@@ -18,6 +18,7 @@ class KafkaDispatcher<T> implements Closeable {
         this.producer = new KafkaProducer<>(properties());
     }
 
+
     private static Properties properties() {
         var properties = new Properties();
         properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
@@ -31,8 +32,8 @@ class KafkaDispatcher<T> implements Closeable {
         return properties;
     }
 
-    void send(String topic, String key, T payload) throws ExecutionException, InterruptedException {
-        var value = new Message<>(new CorrelationId(), payload);
+    void send(String topic, String key, CorrelationId id, T payload) throws ExecutionException, InterruptedException {
+        var value = new Message<>(id, payload);
         var record = new ProducerRecord<>(topic, key, value);
         Callback callback = (data, ex) -> {
             if (ex != null) {

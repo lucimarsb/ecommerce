@@ -16,7 +16,7 @@ public class ReadinReportService {
     public static void main(String[] args) {
         var reportService = new ReadinReportService();
         try (var service = new KafkaService<>(ReadinReportService.class.getSimpleName(),
-                "USER_GENERATE_READING_REPORT",
+                "ECOMMERCE_USER_GENERATE_READING_REPORT",
                 reportService::parse,
                 User.class,
                 Map.of())) {
