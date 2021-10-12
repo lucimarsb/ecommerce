@@ -1,6 +1,6 @@
 package br.com.lucimarsb.ecommerce;
 
-import jakarta.servlet.ServletConfig;
+import br.com.lucimarsb.ecommerce.dispatcher.KafkaDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,13 +14,13 @@ import java.util.concurrent.ExecutionException;
 public class NewOrderServlet extends HttpServlet {
 
     private final KafkaDispatcher<Order> orderDispatcher = new KafkaDispatcher<>();
-    private final KafkaDispatcher<String> emailDispatcher = new KafkaDispatcher<>();
+//    private final KafkaDispatcher<String> emailDispatcher = new KafkaDispatcher<>();
 
     @Override
     public void destroy() {
         super.destroy();
         orderDispatcher.close();
-        emailDispatcher.close();
+//        emailDispatcher.close();
     }
 
     @Override
@@ -36,8 +36,8 @@ public class NewOrderServlet extends HttpServlet {
             var order = new Order(orderId, amount, email);
             orderDispatcher.send("ECOMMERCE_NEW_ORDER", email, new CorrelationId(NewOrderServlet.class.getSimpleName()), order);
 
-            var emailCode = "Obrigado pelo seu pedido! Já Estamos processando!";
-            emailDispatcher.send("ECOMMERCE_SEND_EMAIL", email, new CorrelationId(NewOrderServlet.class.getSimpleName()), emailCode);
+//            var emailCode = "Obrigado pelo seu pedido! Já Estamos processando!";
+//            emailDispatcher.send("ECOMMERCE_SEND_EMAIL", email, new CorrelationId(NewOrderServlet.class.getSimpleName()), emailCode);
 
             System.out.println("Nova order enviada com sucesso.");
             resp.setStatus(HttpServletResponse.SC_OK);

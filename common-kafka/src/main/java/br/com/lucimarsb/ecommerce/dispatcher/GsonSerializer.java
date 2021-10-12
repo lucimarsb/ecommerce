@@ -1,5 +1,7 @@
-package br.com.lucimarsb.ecommerce;
+package br.com.lucimarsb.ecommerce.dispatcher;
 
+import br.com.lucimarsb.ecommerce.Message;
+import br.com.lucimarsb.ecommerce.MessageAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.apache.kafka.common.serialization.Serializer;

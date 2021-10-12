@@ -1,5 +1,7 @@
 package br.com.lucimarsb.ecommerce;
 
+import br.com.lucimarsb.ecommerce.consumer.KafkaService;
+import br.com.lucimarsb.ecommerce.dispatcher.KafkaDispatcher;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 import java.sql.Connection;

@@ -1,5 +1,6 @@
 package br.com.lucimarsb.ecommerce;
 
+import br.com.lucimarsb.ecommerce.consumer.KafkaService;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import java.io.File;
 import java.io.IOException;
